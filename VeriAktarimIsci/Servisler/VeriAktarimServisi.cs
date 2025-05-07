@@ -34,12 +34,28 @@ public sealed class VeriAktarimServisi : IVeriAktarimServisi
             var docs = satirlar.Select(d => new UrunDokumani
             {
                 Id = d.Id,
-                Name = d.Name,
-                ManufacturerName = d.ManufacturerName,
-                CreateDate = d.CreateDate,
-                Language = d.Language,
-                Price = d.Price,
-                TopCategoryName = d.TopCategoryName,
+                ActivityLogTypeId = d.ActivityLogTypeId,
+                CustomerId = d.CustomerId,
+                Comment = d.Comment,
+                LogCreatedOnUtc = d.LogCreatedOnUtc,
+                Email = d.Email,
+                HasShoppingCartItems = d.HasShoppingCartItems ,
+                Active = d.Active ,
+                Deleted = d.Deleted,
+                LastIpAddress = d.LastIpAddress,
+                AccountCreatedOnUtc = d.AccountCreatedOnUtc,
+                LastLoginDateUtc = d.LastLoginDateUtc,
+                LastActivityDateUtc = d.LastActivityDateUtc,
+                BillingAddressId = d.BillingAddressId,
+                ShippingAddressId = d.ShippingAddressId,
+                Reference = d.Reference,
+                AuthenticationTypeId = d.AuthenticationTypeId,
+                AuthenticatedDateOnUtc = d.AuthenticatedDateOnUtc,
+                SmsAuthenticatedDateOnUtc = d.SmsAuthenticatedDateOnUtc,
+                SmsAuthenticationTypeId = d.SmsAuthenticationTypeId,
+                MobilePlatform = d.MobilePlatform,
+
+                // Ek alan: her yüklemede güncellenen tarih
                 Guncelleme = DateTime.UtcNow
             }).ToList();
 
