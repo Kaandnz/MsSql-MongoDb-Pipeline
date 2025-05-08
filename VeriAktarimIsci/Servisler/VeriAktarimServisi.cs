@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Hangfire;
+using MongoDB.Driver;
 using VeriAktarimIsci.Kaynak;
 using VeriAktarimIsci.Model;
 
@@ -20,6 +21,7 @@ public sealed class VeriAktarimServisi : IVeriAktarimServisi
         _col = col;
     }
 
+    [DisableConcurrentExecution(7200)]
     public async Task AktarAsync(CancellationToken token)
     {
         const int SayfaBoyutu = 8000;     
@@ -65,6 +67,9 @@ public sealed class VeriAktarimServisi : IVeriAktarimServisi
                 { IsUpsert = true });
 
             await _col.BulkWriteAsync(ops, cancellationToken: token);
+            Console.WriteLine($"Sayfa {sayfaNo} – {docs.Count} kayıt");
+
+
 
             toplam += docs.Count;
             sayfaNo += 1;

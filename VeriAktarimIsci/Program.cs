@@ -24,7 +24,6 @@ builder.Services.AddSingleton(sp => sp.GetRequiredService<IMongoClient>()
 builder.Services.AddSingleton<IVeriAktarimServisi, VeriAktarimServisi>();
 
 // Varsayılan Worker (şablondaki) – istersen silebilirsin
-builder.Services.AddHostedService<Worker>();
 
 // ─── Hangfire ───
 builder.Services.AddHangfire(cfg =>
@@ -48,10 +47,10 @@ using (var scope = host.Services.CreateScope())
         cronExpression: "*/5 * * * *",          
         timeZone: TimeZoneInfo.Local);
     Console.WriteLine("[INIT] Hangfire job kaydedildi (*/5d)");
+    jobs.Trigger("sqlden-mongoya-aktarim");
 
     // 3️⃣  Uygulama açılır açılmaz deneme çalıştırmak istersen – TRIGGER
-    jobs.Trigger("sqlden-mongoya-aktarim");
-    Console.WriteLine("[INIT] İlk tetik gönderildi");
+
 }
 
 
