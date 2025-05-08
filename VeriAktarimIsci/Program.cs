@@ -45,8 +45,14 @@ using (var scope = host.Services.CreateScope())
     jobs.AddOrUpdate<IVeriAktarimServisi>(
         recurringJobId: "sqlden-mongoya-aktarim",
         methodCall: s => s.AktarAsync(CancellationToken.None),
-        cronExpression: "*/10 * * * * *",          
+        cronExpression: "*/5 * * * *",          
         timeZone: TimeZoneInfo.Local);
+    Console.WriteLine("[INIT] Hangfire job kaydedildi (*/5d)");
+
+    // 3️⃣  Uygulama açılır açılmaz deneme çalıştırmak istersen – TRIGGER
+    jobs.Trigger("sqlden-mongoya-aktarim");
+    Console.WriteLine("[INIT] İlk tetik gönderildi");
 }
+
 
 await host.RunAsync();

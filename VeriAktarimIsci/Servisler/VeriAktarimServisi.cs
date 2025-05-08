@@ -22,7 +22,7 @@ public sealed class VeriAktarimServisi : IVeriAktarimServisi
 
     public async Task AktarAsync(CancellationToken token)
     {
-        const int SayfaBoyutu = 100;     
+        const int SayfaBoyutu = 8000;     
         int sayfaNo = 0;
         int toplam = 0;
 
